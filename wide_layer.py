@@ -39,28 +39,13 @@ class wide_part(keras.layers.Layer):
         # (None,108,V) == > (None, )
         order_2_output = 0.5 * tf.subtract(square_of_sum, sum_of_square)
         # (None,) ==> (None,)
-        order_1_output = keras.layers.Reshape((-1, 1))(order_1_output)
-        # (None,) ==> (None,1,1)
-        order_2_output = keras.layers.Reshape((-1, 1))(order_2_output)
-        # (None,) ==> (None,1,1)
+        order_1_output = keras.layers.Reshape([1])(order_1_output)
+        # (None,) ==> (None,1)
+        order_2_output = keras.layers.Reshape([1])(order_2_output)
+        # (None,) ==> (None,1)
         wide_output = keras.layers.Concatenate(axis=1)([order_1_output, order_2_output])
-        #         print(order_1_output.shape)
-        #         print(order_2_output.shape)
-        # (None,2,1)
+        # (None,2)
 
-        linear_terms = tf.reduce_sum(
-            tf.math.multiply(self.W, inputs), axis=1, keepdims=False)
-
-        # (batch_size, )
-        interactions = 0.5 * tf.subtract(
-            tf.square(tf.reduce_sum(embedded_fields, [1, 2])),
-            tf.reduce_sum(tf.square(embedded_fields), [1, 2])
-        )
-
-        linear_terms = tf.reshape(linear_terms, [-1, 1])
-        interactions = tf.reshape(interactions, [-1, 1])
-
-        wide_output = tf.concat([linear_terms, interactions], 1)
 
         return wide_output, embedded_fields
 

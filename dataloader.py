@@ -66,8 +66,10 @@ class dataloader:
 
         ratings_df = ratings_df.merge(users_df, how="left")
         ratings_df = ratings_df.merge(movies_df, how="left")
+        ratings_df = ratings_df.astype("float32")
         self.target = ratings_df["rating"]
-        self.binary_target = self.target >= 4.0
+        self.binary_target = (self.target >= 4.0).astype("float32")
+
         ratings_df.drop("rating", inplace=True, axis=1)
         self.X = ratings_df
         #embedding_index for lookup same field

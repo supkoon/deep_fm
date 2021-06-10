@@ -1,3 +1,5 @@
+import pandas as pd
+
 from dataloader import dataloader
 from wide_layer import wide_part
 from deep_layer import deep_part
@@ -101,3 +103,4 @@ if __name__ == "__main__":
         history = model.fit(X_train, y_train, batch_size=batch_size, epochs=epochs,
                             validation_data=(X_test, y_test), callbacks=[early_stopping_callback]
                             )
+    pd.DataFrame(history.history).plot()

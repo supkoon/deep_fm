@@ -20,4 +20,5 @@ class deep_part(keras.layers.Layer):
             result = layer(result)
 
         deep_result = self.output_layer(result)
+        #(None,1)
         return deep_result
