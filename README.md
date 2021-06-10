@@ -12,6 +12,6 @@ Guo, H. et al. “DeepFM: A Factorization-Machine based Neural Network for CTR P
 
 ## example : FM
 ```
-python DeepFm.py --path "./datasets/" --dataset "movielens" --embedding_size 8 --dropout_rate 0.5 --epochs 10 --batch_size 32 --lr 0.01 --learner "Adam" --layers [400,400,400] --activation 'relu' --patience 10 --test_size 0.1 --out 1
+python DeepFm.py --path "./datasets/" --dataset "movielens" --embedding_size 8 --dropout_rate 0.5 --epochs 10 --batch_size 32 --lr 0.01 --learner "Adam" --layers 400 400 400 --activation 'relu' --patience 10 --test_size 0.1 --out 1
 
 ```
